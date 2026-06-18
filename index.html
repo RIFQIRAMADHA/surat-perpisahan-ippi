@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat dari Kami Rifqi dan Ibni</title>
+    <title>Sistem Keamanan | Memo Rahasia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Caveat:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
@@ -13,11 +13,12 @@
             background-color: #050b14;
             color: white; 
             overflow: hidden; 
+            touch-action: manipulation;
         }
         .font-handwriting { font-family: 'Caveat', cursive; }
         .font-tech { font-family: 'Share Tech Mono', monospace; }
 
-        /* Background Gradasi Kertas Surat */
+        /* Background Surat & Partikel */
         #bg-surat {
             background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #0f172a);
             background-size: 400% 400%;
@@ -25,14 +26,32 @@
             opacity: 0;
             display: none;
         }
-
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Efek Garis Scanner */
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(167, 139, 250, 0.5);
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+
+        /* Elemen Sidik Jari */
         .scan-line {
             width: 100%;
             height: 4px;
@@ -44,19 +63,15 @@
             opacity: 0;
             z-index: 20;
         }
-
         .scanning .scan-line {
             animation: scanAnim 1.5s linear infinite;
             opacity: 1;
         }
-
         @keyframes scanAnim {
             0% { top: 0%; }
             50% { top: 100%; }
             100% { top: 0%; }
         }
-
-        /* Sidik Jari Glow */
         .fingerprint-icon {
             filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.5));
             transition: all 0.3s ease;
@@ -64,63 +79,140 @@
         .fingerprint-btn:hover .fingerprint-icon {
             filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.9));
             transform: scale(1.05);
-        }`
+        }
+
+        /* Elemen Game Firewall */
+        .glitch-text { text-shadow: 2px 2px 10px rgba(14, 165, 233, 0.8); }
+        .game-track {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+        .target-zone {
+            position: absolute;
+            height: 100%;
+            background: rgba(34, 197, 94, 0.2);
+            border-left: 2px solid #22c55e;
+            border-right: 2px solid #22c55e;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+        }
+        .slider-bar {
+            position: absolute;
+            top: -2px;
+            bottom: -2px;
+            width: 6px;
+            background: #0ea5e9;
+            box-shadow: 0 0 15px #0ea5e9, 0 0 30px #0ea5e9;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+        .lock-icon { transition: all 0.3s ease; }
+        .unlocked { color: #22c55e; filter: drop-shadow(0 0 8px #22c55e); }
+        .error-flash { animation: flashRed 0.4s ease; }
+        @keyframes flashRed {
+            0%, 100% { background-color: #050b14; }
+            50% { background-color: #450a0a; }
+        }
+
+        /* Custom Scrollbar */
+        .text-scroll-container::-webkit-scrollbar { width: 6px; }
+        .text-scroll-container::-webkit-scrollbar-track { background: transparent; }
+        .text-scroll-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen relative">
+<body class="flex items-center justify-center min-h-screen relative" id="body-main">
 
-    <!-- BG Kertas Surat (Ditampilkan nanti) -->
+    <!-- BG Kertas Surat & Partikel -->
     <div id="bg-surat" class="absolute inset-0 z-0"></div>
+    <div id="particle-container" class="absolute inset-0 z-10 overflow-hidden hidden"></div>
 
+    <!-- Audio Files -->
     <audio id="audio-scan">
         <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3" type="audio/mp3"> 
     </audio>
-
+    <audio id="audio-error">
+        <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/paza-drop.mp3" type="audio/mp3">
+    </audio>
+    <audio id="audio-success">
+        <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3" type="audio/mp3">
+    </audio>
     <audio id="audio-sedih" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mp3">
-    </audio>   
-
+        <source src="sampai-jumpa.mp3" type="audio/mp3">
+    </audio>
     <!-- ==========================================
-         LAYAR 1: FAKE FINGERPRINT SCANNER
+         LAYAR 1: FINGERPRINT SCANNER
          ========================================== -->
-    <div id="layar-awal" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14]">
-        
+    <div id="layar-awal" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6">
         <div class="text-center mb-8">
             <h2 class="font-tech text-[#0ea5e9] text-xl md:text-2xl tracking-widest uppercase mb-2">Security System</h2>
-            <p id="status-text" class="text-slate-400 text-sm md:text-base tracking-wide">Akses Terbatas. Identifikasi Diperlukan.</p>
+            <p id="status-text-scan" class="text-slate-400 text-sm md:text-base tracking-wide">Akses Terbatas. Identifikasi Diperlukan.</p>
         </div>
 
-        <!-- Tombol Fingerprint -->
         <button id="btn-scan" class="fingerprint-btn relative w-32 h-40 flex items-center justify-center cursor-pointer outline-none tap-highlight-transparent">
-            <!-- SVG Fingerprint -->
             <svg class="fingerprint-icon w-full h-full text-[#0ea5e9] opacity-80" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12 3c-2.03 0-3.69.44-5.61 1.44-.36.19-.8.05-1-.31-.19-.35-.05-.8.31-1C7.89 2.04 9.78 1.5 12 1.5c2.24 0 4.08.48 6.13 1.54.37.19.51.64.32 1-.14.26-.41.43-.64.43zm2.56 5.8c-.12 0-.25-.03-.36-.09-3.23-1.89-6.3-2.31-9.92-1.27-.39.11-.8-.11-.91-.5-.11-.39.11-.8.5-.91 4.14-1.18 7.64-.7 11.24 1.4.35.2.47.65.27 1.01-.15.24-.4.36-.82.36zm-8.32 12.23c-.3 0-.58-.19-.71-.48-.68-1.58-1.05-3.32-1.05-5.01 0-3.3 2.65-5.98 5.92-5.98 1.58 0 3.09.62 4.2 1.74.29.3.29.77-.01 1.06-.3.29-.77.29-1.06-.01-1.46-1.5-3.8-1.5-5.26 0-.7.71-1.09 1.66-1.09 2.66 0 1.25.26 2.44.75 3.55.17.38-.01.82-.39.98-.1.04-.19.06-.3.06zm-4.71-1.47c-.24 0-.47-.12-.61-.33-1.41-2.09-2.15-4.57-2.15-7.14 0-4.04 2.1-7.78 5.56-9.87.35-.21.81-.1 1.03.26.21.36.1.81-.26 1.03-3.05 1.84-4.83 5.14-4.83 8.58 0 2.27.65 4.45 1.89 6.29.23.33.14.79-.19 1.02-.13.09-.28.16-.44.16zm10.74-5.32c-.17 0-.34-.06-.47-.18-1.02-.93-2.4-1.44-3.84-1.44-1.45 0-2.83.51-3.85 1.44-.31.28-.78.26-1.06-.05-.28-.31-.26-.78.05-1.06 1.3-1.19 3.03-1.84 4.86-1.84s3.56.65 4.86 1.84c.31.28.33.75.05 1.06-.15.15-.35.23-.55.23zm-7.66 6.74c-.16 0-.31-.05-.44-.15-1.74-1.35-2.77-3.41-2.77-5.54 0-2.91 2.37-5.28 5.28-5.28s5.28 2.37 5.28 5.28c0 .41-.34.75-.75.75s-.75-.34-.75-.75c0-2.08-1.69-3.78-3.78-3.78s-3.78 1.69-3.78 3.78c0 1.57.77 3.08 2.05 4.08.33.26.39.73.13 1.06-.18.22-.44.33-.7.33z"/>
             </svg>
-            <!-- Garis Animasi Scanner -->
             <div class="scan-line"></div>
         </button>
-        
-        <p class="text-[#0ea5e9] mt-8 text-sm md:text-base font-tech animate-pulse">Klik sidik jari untuk verifikasi</p>
+        <p class="text-[#0ea5e9] mt-8 text-sm md:text-base font-tech animate-pulse">Klik sidik jari untuk memindai</p>
     </div>
 
     <!-- ==========================================
-         LAYAR 2: KERTAS SURAT (MUNCUL SETELAH AKSES DITERIMA)
+         LAYAR 2: MINIGAME HACKING FIREWALL
          ========================================== -->
-    <div id="kertas-surat" class="opacity-0 translate-y-10 bg-white/95 backdrop-blur-sm text-slate-800 p-8 md:p-12 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-2xl w-[90%] absolute z-40 border border-indigo-100 hidden">
-        <div class="mb-6 border-b-2 border-slate-200 pb-4 relative">
-            <span class="absolute top-0 right-0 text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Perpisahan</span>
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">UNTUK YTH:</h2>
-            <h1 id="teks-nama" class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mt-1">Nama</h1>
+    <div id="layar-game" class="hidden absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6 opacity-0">
+        <div class="text-center mb-10">
+            <h2 class="font-tech text-red-500 text-2xl md:text-4xl tracking-widest uppercase mb-2 glitch-text !text-red-500 !shadow-[0_0_15px_rgba(239,68,68,0.8)]">Firewall Terdeteksi!</h2>
+            <p id="game-status" class="text-slate-400 text-sm md:text-base tracking-wide font-tech">Akses diblokir. Sinkronkan frekuensi untuk memecahkan sandi.</p>
+        </div>
+
+        <div class="flex gap-4 mb-8">
+            <svg id="lock-1" class="lock-icon w-10 h-10 text-slate-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+            <svg id="lock-2" class="lock-icon w-10 h-10 text-slate-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+            <svg id="lock-3" class="lock-icon w-10 h-10 text-slate-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+        </div>
+
+        <div class="w-full max-w-md relative flex flex-col items-center">
+            <div class="game-track mb-6 w-full">
+                <div id="target-zone" class="target-zone"></div>
+                <div id="slider-bar" class="slider-bar"></div>
+            </div>
+            
+            <button id="btn-tap" class="w-40 h-40 rounded-full border-4 border-[#0ea5e9] bg-[#050b14] text-[#0ea5e9] font-tech text-2xl font-bold shadow-[0_0_30px_rgba(14,165,233,0.3)] active:scale-95 active:bg-[#0ea5e9] active:text-white transition-all select-none">
+                TAP!
+            </button>
+            <p class="mt-4 text-xs text-slate-500 font-tech uppercase tracking-widest text-center">Tap layar saat garis berada di area hijau</p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         LAYAR 3: KERTAS SURAT
+         ========================================== -->
+    <div id="kertas-surat" class="opacity-0 translate-y-10 bg-white/95 backdrop-blur-sm text-slate-800 p-8 md:p-12 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-2xl w-[90%] absolute z-40 border border-indigo-100 hidden flex flex-col max-h-[85vh]">
+        <div class="mb-6 border-b-2 border-slate-200 pb-4 relative shrink-0">
+            <span class="absolute top-0 right-0 text-[10px] md:text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Perpisahan</span>
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">UNTUK:</h2>
+            <h1 id="teks-nama" class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mt-1">Nama</h1>
             <p id="teks-jabatan" class="text-sm text-slate-500 font-medium mt-1">Jabatan</p>
         </div>
         
-        <div class="min-h-[180px] flex items-start mt-4">
-            <span id="pesan-teks" class="text-lg leading-relaxed font-medium text-slate-700 italic"></span>
+        <div class="flex-grow overflow-y-auto text-scroll-container pr-2 pb-4">
+            <div class="min-h-[120px] flex items-start">
+                <span id="pesan-utama" class="text-base md:text-lg leading-relaxed font-medium text-slate-700 italic"></span>
+            </div>
+            <div class="mt-4 flex items-start">
+                <span id="pesan-penutup" class="text-base md:text-lg leading-relaxed font-medium text-slate-600"></span>
+            </div>
         </div>
 
-        <div class="mt-8 text-right opacity-0 transform translate-y-4 transition-all duration-1000" id="ttd-pengirim">
-            <p class="text-slate-400 text-sm">Salam hormat dan terima kasih,</p>
-            <h3 class="text-5xl font-handwriting text-indigo-600 mt-2 select-none">Rifqi & Ibni</h3>
+        <div class="mt-4 border-t-2 border-slate-100 pt-4 text-right opacity-0 transform translate-y-4 transition-all duration-1000 shrink-0" id="ttd-pengirim">
+            <p class="text-slate-400 text-sm font-medium">Tertanda, dengan penuh hormat,</p>
+            <h3 class="text-4xl md:text-5xl font-handwriting text-indigo-600 mt-1 select-none">Rifqi & Ibni</h3>
         </div>
     </div>
 
@@ -129,98 +221,202 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
-        // 1. DATABASE PESAN FORMAL PT IPPI
+        // 1. DATABASE PESAN
         const databasePesan = {
-            'mas-ibnu': { nama: 'Mas Ibnu', jabatan: 'PT IPPI', teks: 'Yth. Mas Ibnu. Rasanya kata terima kasih saja tidak cukup untuk membalas kesabaran dan arahan Mas Ibnu selama kami magang di PT IPPI. Terima kasih sudah mengajarkan kami banyak hal tentang standar kerja profesional di industri nyata. Sukses dan sehat selalu, Mas!' },
-            'pak-dasep': { nama: 'Bapak Dasep', jabatan: 'PT IPPI', teks: 'Yth. Bapak Dasep. Merupakan sebuah kebanggaan bagi kami bisa belajar dan berkontribusi di PT IPPI di bawah bimbingan Bapak. Terima kasih atas kepercayaan, ilmu, serta wawasan berharga yang tidak kami dapatkan di bangku kuliah. Semoga Bapak senantiasa diberikan kesehatan.' },
-            'pak-eko': { nama: 'Bapak Eko', jabatan: 'Manager PT IPPI', teks: 'Yth. Bapak Eko. Terima kasih banyak atas segala dukungan, feedback, dan keterbukaan Bapak dalam membimbing kami. Pengalaman berharga ini menjadi fondasi penting bagi karir kami ke depan. Mohon maaf atas segala kekurangan kami selama bertugas, Pak. Sukses selalu!' },
-            'pak-mury': { nama: 'Bapak Mury', jabatan: 'HRD PT IPPI', teks: 'Yth. Bapak Mury. Kami sangat bersyukur atas kesempatan dan wawasan yang Bapak bagikan selama kami berada di PT IPPI. Terima kasih atas setiap arahan yang membuat kami berkembang menjadi lebih baik. Semoga keberkahan dan kelancaran selalu menyertai Bapak.' },
-            'pak-deddy': { nama: 'Bapak Deddy', jabatan: 'PT IPPI', teks: 'Yth. Bapak Deddy. Mewakili kami berdua, kami ingin mengucapkan terima kasih atas waktu, tenaga, dan ilmu yang Bapak luangkan untuk kami. Bimbingan Bapak sangat berarti dalam proses penyelesaian tugas kami di sini. Sehat selalu untuk Bapak dan keluarga.' },
-            'pak-yoga': { nama: 'Bapak Yoga', jabatan: 'PT IPPI', teks: 'Yth. Bapak Yoga. Terima kasih yang sedalam-dalamnya atas arahan detail dan wawasan praktis yang Bapak berikan. Kesabaran Bapak dalam membimbing kami adalah hal yang sangat kami syukuri. Semoga PT IPPI semakin maju dan Bapak terus menginspirasi.' },
-            'mas-azka': { nama: 'Mas Azka', jabatan: 'Supervisor Produksi PT IPPI', teks: 'Yth. Mas Azka. Terima kasih banyak, Mas, sudah sangat welcome dan suportif terhadap kami selama magang. Diskusi dan masukan dari Mas Azka sangat membantu kelancaran project kami. Harapan terbaik untuk karir dan kehidupan Mas Azka ke depannya!' },
-            'mas-adi': { nama: 'Mas Adi', jabatan: 'PT IPPI', teks: 'Yth. Mas Adi. Terima kasih atas kolaborasi, bantuan, dan suasana kerja yang hangat selama kami berada di PT IPPI. Kami sangat mengapresiasi setiap bantuan teknis maupun moril dari Mas Adi. Sampai jumpa di puncak kesuksesan, Mas!' },
-            'mas-yugo': { nama: 'Mas Yugo', jabatan: 'Supervisor Maintenance PT IPPI', teks: 'Yth. Mas Yugo. Terima kasih atas bimbingan dan kesediaan Mas Yugo membagikan pengalaman di lapangan kepada kami. Ilmu tersebut menjadi bekal berharga yang akan terus kami bawa. Mohon maaf jika ada salah kata maupun perbuatan. Sukses terus, Mas!' },
-            'pak-amel': { nama: 'Bapak Amel', jabatan: 'PT IPPI', teks: 'Yth. Bapak Amel. Kami menyampaikan rasa terima kasih atas setiap arahan, keramahan, dan kesempatan berharga yang telah diberikan kepada kami. Pengalaman magang di PT IPPI menjadi memori yang luar biasa berkat dukungan Bapak. Jaya selalu untuk Bapak.' },
-            'default': { nama: 'Keluarga Besar PT IPPI', jabatan: 'PT IPPI', teks: 'Kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya atas kesempatan berharga, arahan, dan bimbingan selama kami magang di PT IPPI. Mohon maaf atas segala kekurangan kami. Semoga PT IPPI semakin sukses dan jaya selalu.' }
+            'mas-ibnu': { nama: 'Mas Ibnu', jabatan: 'PT IPPI', teks: 'Teruntuk Mas Ibnu. Rasanya kata terima kasih saja tidak cukup untuk membalas kesabaran dan arahan Mas Ibnu selama kami magang di PT IPPI. Terima kasih sudah mengajari kami dari yang awalnya masih sering bingung, sampai akhirnya kami bisa paham alur sistem di lapangan. Bimbingan Mas Ibnu bener-bener ngebuka wawasan kami tentang gimana dunia industri yang sebenarnya berjalan. Sehat dan sukses terus untuk karir Mas Ibnu ke depannya!' },
+            'pak-dasep': { nama: 'Bapak Dasep', jabatan: 'PT IPPI', teks: 'Kepada Bapak Dasep yang kami hormati. Merupakan sebuah kebanggaan bagi kami berdua bisa belajar dan berkontribusi secara langsung di PT IPPI di bawah bimbingan Bapak. Terima kasih yang tak terhingga atas kepercayaan, ilmu, serta teguran membangun yang selalu Bapak berikan. Nasihat Bapak akan selalu menjadi kompas bagi kami dalam melangkah di dunia kerja nanti. Semoga Bapak senantiasa diberikan kesehatan dan keberkahan.' },
+            'pak-eko': { nama: 'Bapak Eko', jabatan: 'Manager PT IPPI', teks: 'Teruntuk Bapak Eko. Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala dukungan, feedback, dan keterbukaan Bapak dalam membimbing langkah kami di sini. Cara Bapak memimpin dan mengarahkan tim menjadi inspirasi tersendiri bagi kami. Pengalaman berharga ini menjadi fondasi penting bagi karir kami. Mohon maaf atas segala kekurangan kami selama bertugas, Pak. Jaya dan sukses selalu!' },
+            'pak-mury': { nama: 'Bapak Mury', jabatan: 'HRD PT IPPI', teks: 'Kepada Bapak Mury yang kami hormati. Kami sangat bersyukur atas kesempatan luar biasa dan wawasan yang Bapak bagikan selama kami menimba ilmu di PT IPPI. Terima kasih telah menyambut kami dengan hangat sejak hari pertama, serta atas setiap arahan yang membuat kami berkembang menjadi versi yang lebih baik. Semoga keberkahan, kelancaran, dan kebahagiaan selalu menyertai Bapak beserta keluarga.' },
+            'pak-deddy': { nama: 'Bapak Deddy', jabatan: 'PT IPPI', teks: 'Teruntuk Bapak Deddy. Mewakili kami berdua, kami sungguh ingin mengucapkan banyak terima kasih atas waktu, tenaga, dan ilmu yang Bapak luangkan di sela-sela kesibukan Bapak untuk kami. Bimbingan dan diskusi bersama Bapak sangat berarti dalam proses penyelesaian tugas kami di sini. Kami belajar banyak hal berharga. Sehat selalu untuk Bapak, semoga rezekinya senantiasa dilancarkan.' },
+            'pak-yoga': { nama: 'Bapak Yoga', jabatan: 'PT IPPI', teks: 'Kepada Bapak Yoga yang kami hormati. Terima kasih yang sedalam-dalamnya atas arahan yang sangat detail dan wawasan praktis yang Bapak berikan kepada kami. Kesabaran Bapak dalam menjawab pertanyaan dan membimbing kami adalah hal yang sangat kami syukuri dari program magang ini. Semoga PT IPPI semakin maju di bawah inovasi-inovasi Bapak, dan Bapak terus menjadi sosok yang menginspirasi.' },
+            'mas-azka': { nama: 'Mas Azka', jabatan: 'Supervisor Produksi PT IPPI', teks: 'Halo Mas Azka! Lewat pesan singkat ini, kami mau bilang terima kasih banyak karena sudah sangat welcome, asik, dan suportif terhadap kami dari awal sampai akhir magang. Diskusi bareng, masukan, dan cerita-cerita dari Mas Azka beneran sangat membantu kelancaran project kami sekaligus bikin suasana kerja jadi lebih hidup. Harapan terbaik untuk karir dan kehidupan Mas Azka ke depannya!' },
+            'mas-adi': { nama: 'Mas Adi', jabatan: 'PT IPPI', teks: 'Teruntuk Mas Adi. Terima kasih banyak atas kolaborasi yang seru, bantuan tanpa henti, dan suasana kerja yang hangat selama kami berada di PT IPPI. Kami bener-bener mengapresiasi setiap bantuan teknis, wejangan, maupun dukungan moril dari Mas Adi di saat kami lagi buntu ngerjain tugas. Jaga kesehatan terus, Mas. Sampai jumpa lagi di puncak kesuksesan nanti!' },
+            'mas-yugo': { nama: 'Mas Yugo', jabatan: 'Supervisor Maintenance PT IPPI', teks: 'Halo Mas Yugo. Terima kasih banyak atas bimbingan dan kesediaan Mas Yugo membagikan pengalaman asli di lapangan kepada kami. Melihat langsung cara Mas Yugo nge-handle problem bener-bener jadi bekal berharga yang akan terus kami bawa. Kami memohon maaf jika selama di sini ada salah kata maupun perbuatan yang kurang berkenan. Sukses dan jaya terus, Mas!' },
+            'pak-amel': { nama: 'Bapak Amel', jabatan: 'PT IPPI', teks: 'Teruntuk Bapak Amel. Melalui surat kecil ini, kami ingin menyampaikan rasa terima kasih atas setiap arahan, keramahan, dan kesempatan berharga yang telah diberikan kepada kami. Pengalaman magang di PT IPPI menjadi sebuah perjalanan dan memori yang luar biasa, dan itu semua berkat dukungan dari Bapak. Semoga Bapak selalu diberikan kesehatan dan kemudahan dalam segala hal.' },
+            'default': { nama: 'Keluarga Besar PT IPPI', jabatan: 'PT IPPI', teks: 'Kepada seluruh Keluarga Besar PT IPPI, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya atas kesempatan berharga, arahan, dan bimbingan selama kami melaksanakan program magang di sini. Terima kasih telah menerima kami dengan tangan terbuka. Mohon maaf yang setulus-tulusnya atas segala kekurangan dan kesalahan kami. Semoga PT IPPI semakin meroket sukses dan jaya selalu.' }
         };
+
+        const pesanPenutupUniversal = "^500 Banyak tawa, canda, diskusi, dan pelajaran berharga yang kami lewati di tempat ini. Terima kasih telah menjadikan perjalanan magang kami begitu berwarna dan berkesan. ^500 Kami pamit undur diri, namun kenangan kebersamaan di PT IPPI akan selalu mendapat tempat khusus di hati kami berdua. ^1000";
 
         const urlParams = new URLSearchParams(window.location.search);
         let idUntuk = urlParams.get('untuk');
         if (!idUntuk || !databasePesan[idUntuk]) idUntuk = 'default';
         const dataSurat = databasePesan[idUntuk];
 
-        // 2. FUNGSI SCANNER & AUDIO CONTROL
-        const btnScan = document.getElementById('btn-scan');
-        const statusText = document.getElementById('status-text');
-        const bgSurat = document.getElementById('bg-surat');
-        const kertasSurat = document.getElementById('kertas-surat');
+        // 2. STATE & AUDIO
         const audioScan = document.getElementById('audio-scan');
+        const audioErr = document.getElementById('audio-error');
+        const audioSucc = document.getElementById('audio-success');
         const audioSedih = document.getElementById('audio-sedih');
 
+        // --- FASE 1: SCAN SIDIK JARI ---
+        const btnScan = document.getElementById('btn-scan');
+        const statusTextScan = document.getElementById('status-text-scan');
+        const layarAwal = document.getElementById('layar-awal');
+        const layarGame = document.getElementById('layar-game');
+
         btnScan.addEventListener('click', function() {
-            // Mencegah double klik
             btnScan.style.pointerEvents = 'none';
-            
-            // Putar Audio Scanning
             audioScan.volume = 0.5;
             audioScan.play().catch(e => console.log("Audio play dicegah: ", e));
 
-            // Ubah text jadi scanning
-            statusText.innerHTML = "Memindai biometrik... Harap tunggu.";
-            statusText.classList.replace('text-slate-400', 'text-yellow-400');
+            statusTextScan.innerHTML = "Memindai biometrik... Harap tunggu.";
+            statusTextScan.classList.replace('text-slate-400', 'text-yellow-400');
             btnScan.classList.add('scanning');
 
-            // Simulasi proses scanning 2.5 detik
             setTimeout(() => {
                 btnScan.classList.remove('scanning');
-                
-                // Tampilkan nama penerima
-                statusText.innerHTML = `Akses Diterima:<br><span class="text-2xl font-bold text-green-400 mt-2 block">${dataSurat.nama}</span>`;
-                statusText.classList.replace('text-yellow-400', 'text-green-500');
-                
-                // SVG warna berubah hijau
+                statusTextScan.innerHTML = `Identitas Valid.<br><span class="text-lg font-bold text-green-400 mt-2 block">Mengakses Sistem...</span>`;
+                statusTextScan.classList.replace('text-yellow-400', 'text-green-500');
                 document.querySelector('.fingerprint-icon').classList.replace('text-[#0ea5e9]', 'text-green-500');
 
-                // Jeda sebentar buat pamer tulisan "Akses Diterima"
+                // Transisi ke Layar Game (Firewall)
                 setTimeout(() => {
-                    bukaSurat();
+                    gsap.to(layarAwal, { 
+                        duration: 0.8, 
+                        opacity: 0, 
+                        display: "none", 
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            layarGame.classList.remove('hidden');
+                            gsap.to(layarGame, { duration: 0.8, opacity: 1, ease: "power2.inOut" });
+                            setTimeout(() => { startLevel(); }, 500); // Mulai game otomatis
+                        }
+                    });
                 }, 1500);
-
             }, 2500);
         });
 
-        // 3. FUNGSI MUNCULIN SURAT & GANTI LAGU
+        // --- FASE 2: MINIGAME HACKING FIREWALL ---
+        const btnTap = document.getElementById('btn-tap');
+        const sliderBar = document.getElementById('slider-bar');
+        const targetZone = document.getElementById('target-zone');
+        const statusTextGame = document.getElementById('game-status');
+        
+        let isPlaying = false;
+        let position = 0; 
+        let direction = 1; 
+        let currentLevel = 1;
+        let animFrame;
+
+        // Setting Kesulitan per Level [speed, Lebar Target, Posisi Kiri Target]
+        const levels = [
+            { speed: 1.2, width: 30, left: 35 }, 
+            { speed: 2.0, width: 20, left: 60 }, 
+            { speed: 3.5, width: 12, left: 20 }  
+        ];
+
+        function startLevel() {
+            let config = levels[currentLevel - 1];
+            
+            targetZone.style.width = config.width + '%';
+            targetZone.style.left = config.left + '%';
+            
+            position = 0;
+            isPlaying = true;
+            statusTextGame.innerText = `Bypass Node ${currentLevel}/3...`;
+            statusTextGame.classList.replace('text-red-400', 'text-slate-400');
+            
+            cancelAnimationFrame(animFrame);
+            gameLoop();
+        }
+
+        function gameLoop() {
+            if(!isPlaying) return;
+            
+            let config = levels[currentLevel - 1];
+            position += (direction * config.speed);
+            
+            if(position >= 100) { position = 100; direction = -1; }
+            if(position <= 0) { position = 0; direction = 1; }
+            
+            sliderBar.style.left = position + '%';
+            animFrame = requestAnimationFrame(gameLoop);
+        }
+
+        btnTap.addEventListener('click', () => {
+            if(!isPlaying) return;
+            
+            let config = levels[currentLevel - 1];
+            if(position >= config.left && position <= (config.left + config.width)) {
+                // Berhasil tap pas
+                audioSucc.currentTime = 0; audioSucc.play();
+                document.getElementById(`lock-${currentLevel}`).classList.add('unlocked');
+                
+                if(currentLevel === 3) {
+                    isPlaying = false;
+                    statusTextGame.innerHTML = "FIREWALL BYPASSED. AKSES DIBERIKAN.";
+                    statusTextGame.classList.replace('text-slate-400', 'text-green-500');
+                    document.querySelector('.glitch-text').innerHTML = "SYSTEM UNLOCKED";
+                    document.querySelector('.glitch-text').classList.replace('text-red-500', 'text-green-500');
+                    
+                    setTimeout(() => { bukaSurat(); }, 1500);
+                } else {
+                    isPlaying = false;
+                    currentLevel++;
+                    setTimeout(() => { startLevel(); }, 500);
+                }
+            } else {
+                // Gagal tap
+                audioErr.currentTime = 0; audioErr.play();
+                statusTextGame.innerText = "Sinkronisasi Gagal! Coba lagi.";
+                statusTextGame.classList.replace('text-slate-400', 'text-red-400');
+                document.getElementById('body-main').classList.add('error-flash');
+                
+                setTimeout(() => { document.getElementById('body-main').classList.remove('error-flash'); }, 400);
+            }
+        });
+
+        // --- FASE 3: MUNCULIN SURAT (VISUAL & AUDIO) ---
+        function createParticles() {
+            const particleContainer = document.getElementById('particle-container');
+            particleContainer.classList.remove('hidden');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particleContainer.appendChild(particle);
+                setTimeout(() => { particle.remove(); }, 8000);
+            }, 300);
+        }
+
         function bukaSurat() {
-            // Matikan suara scan, nyalakan lagu sedih
-            audioScan.pause();
-            audioScan.currentTime = 0;
-            audioSedih.volume = 0.4;
+            audioSedih.volume = 0.5;
             audioSedih.play().catch(e => console.log("Audio sedih dicegah: ", e));
 
-            // Animasi hilang layar tech
-            gsap.to("#layar-awal", { duration: 1, opacity: 0, display: "none", ease: "power2.inOut" });
+            gsap.to("#layar-game", { duration: 1, opacity: 0, display: "none", ease: "power2.inOut" });
             
-            // Munculin background elegan
+            const bgSurat = document.getElementById('bg-surat');
             bgSurat.style.display = "block";
             gsap.to(bgSurat, { duration: 1, opacity: 1, ease: "power2.inOut" });
+            createParticles(); 
 
-            // Isi Data Surat
             document.getElementById('teks-nama').innerText = dataSurat.nama;
             document.getElementById('teks-jabatan').innerText = dataSurat.jabatan;
             
-            // Munculin Kertas & Mulai Mengetik
+            const kertasSurat = document.getElementById('kertas-surat');
             kertasSurat.classList.remove('hidden');
             gsap.to(kertasSurat, {
                 duration: 1.2, y: 0, opacity: 1, delay: 0.5, ease: "elastic.out(1, 0.75)",
                 onComplete: function() {
-                    new Typed('#pesan-teks', {
-                        strings: [dataSurat.teks],
-                        typeSpeed: 40,
+                    new Typed('#pesan-utama', {
+                        strings: [`"${dataSurat.teks}"`],
+                        typeSpeed: 35,
                         showCursor: true,
                         cursorChar: '✍️',
-                        onComplete: function() {
-                            // Tanda tangan muncul perlahan
-                            document.getElementById('ttd-pengirim').classList.remove('opacity-0', 'translate-y-4');
+                        onComplete: function(self) {
+                            self.cursor.remove(); 
+                            
+                            new Typed('#pesan-penutup', {
+                                strings: [pesanPenutupUniversal],
+                                typeSpeed: 40,
+                                showCursor: true,
+                                cursorChar: '✍️',
+                                onComplete: function() {
+                                    document.getElementById('ttd-pengirim').classList.remove('opacity-0', 'translate-y-4');
+                                }
+                            });
                         }
                     });
                 }
