@@ -127,11 +127,9 @@
 </head>
 <body class="flex items-center justify-center min-h-screen relative" id="body-main">
 
-    <!-- BG Kertas Surat & Partikel -->
     <div id="bg-surat" class="absolute inset-0 z-0"></div>
     <div id="particle-container" class="absolute inset-0 z-10 overflow-hidden hidden"></div>
 
-    <!-- Audio Files -->
     <audio id="audio-scan">
         <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3" type="audio/mp3"> 
     </audio>
@@ -144,9 +142,7 @@
     <audio id="audio-sedih" loop>
         <source src="sampai-jumpa.mp3" type="audio/mp3">
     </audio>
-    <!-- ==========================================
-         LAYAR 1: FINGERPRINT SCANNER
-         ========================================== -->
+
     <div id="layar-awal" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6">
         <div class="text-center mb-8">
             <h2 class="font-tech text-[#0ea5e9] text-xl md:text-2xl tracking-widest uppercase mb-2">Security System</h2>
@@ -162,9 +158,6 @@
         <p class="text-[#0ea5e9] mt-8 text-sm md:text-base font-tech animate-pulse">Klik sidik jari untuk memindai</p>
     </div>
 
-    <!-- ==========================================
-         LAYAR 2: MINIGAME HACKING FIREWALL
-         ========================================== -->
     <div id="layar-game" class="hidden absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6 opacity-0">
         <div class="text-center mb-10">
             <h2 class="font-tech text-red-500 text-2xl md:text-4xl tracking-widest uppercase mb-2 glitch-text !text-red-500 !shadow-[0_0_15px_rgba(239,68,68,0.8)]">Firewall Terdeteksi!</h2>
@@ -190,12 +183,9 @@
         </div>
     </div>
 
-    <!-- ==========================================
-         LAYAR 3: KERTAS SURAT
-         ========================================== -->
     <div id="kertas-surat" class="opacity-0 translate-y-10 bg-white/95 backdrop-blur-sm text-slate-800 p-8 md:p-12 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-2xl w-[90%] absolute z-40 border border-indigo-100 hidden flex flex-col max-h-[85vh]">
         <div class="mb-6 border-b-2 border-slate-200 pb-4 relative shrink-0">
-            <span class="absolute top-0 right-0 text-[10px] md:text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Perpisahan</span>
+            <span class="absolute top-0 right-0 text-[10px] md:text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Apresiasi</span>
             <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">UNTUK:</h2>
             <h1 id="teks-nama" class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mt-1">Nama</h1>
             <p id="teks-jabatan" class="text-sm text-slate-500 font-medium mt-1">Jabatan</p>
@@ -211,12 +201,11 @@
         </div>
 
         <div class="mt-4 border-t-2 border-slate-100 pt-4 text-right opacity-0 transform translate-y-4 transition-all duration-1000 shrink-0" id="ttd-pengirim">
-            <p class="text-slate-400 text-sm font-medium">Tertanda, dengan penuh hormat,</p>
+            <p class="text-slate-400 text-sm font-medium">Salam hormat,</p>
             <h3 class="text-4xl md:text-5xl font-handwriting text-indigo-600 mt-1 select-none">Rifqi & Ibni</h3>
         </div>
     </div>
 
-    <!-- LIBRARY -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
@@ -236,7 +225,8 @@
             'default': { nama: 'Keluarga Besar PT IPPI', jabatan: 'PT IPPI', teks: 'Kepada seluruh Keluarga Besar PT IPPI, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya atas kesempatan berharga, arahan, dan bimbingan selama kami melaksanakan program magang di sini. Terima kasih telah menerima kami dengan tangan terbuka. Mohon maaf yang setulus-tulusnya atas segala kekurangan dan kesalahan kami. Semoga PT IPPI semakin meroket sukses dan jaya selalu.' }
         };
 
-        const pesanPenutupUniversal = "^500 Banyak tawa, canda, diskusi, dan pelajaran berharga yang kami lewati di tempat ini. Terima kasih telah menjadikan perjalanan magang kami begitu berwarna dan berkesan. ^500 Kami pamit undur diri, namun kenangan kebersamaan di PT IPPI akan selalu mendapat tempat khusus di hati kami berdua. ^1000";
+        // PESAN PENUTUP (Lebih asik, profesional, nggak lebay)
+        const pesanPenutupUniversal = "^500 Pengalaman magang di sini benar-benar memberikan kami wawasan baru dan bekal penting untuk terjun ke dunia industri yang sebenarnya. Terima kasih atas semua waktu dan bimbingan yang telah diberikan. ^500 Kami izin pamit menyelesaikan program ini. Sukses terus untuk semuanya, semoga kita bisa berkolaborasi lagi di lain kesempatan! ^1000";
 
         const urlParams = new URLSearchParams(window.location.search);
         let idUntuk = urlParams.get('untuk');
