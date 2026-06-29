@@ -127,9 +127,11 @@
 </head>
 <body class="flex items-center justify-center min-h-screen relative" id="body-main">
 
+    <!-- BG Kertas Surat & Partikel -->
     <div id="bg-surat" class="absolute inset-0 z-0"></div>
     <div id="particle-container" class="absolute inset-0 z-10 overflow-hidden hidden"></div>
 
+    <!-- Audio Files -->
     <audio id="audio-scan">
         <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3" type="audio/mp3"> 
     </audio>
@@ -142,7 +144,9 @@
     <audio id="audio-sedih" loop>
         <source src="sampai-jumpa.mp3" type="audio/mp3">
     </audio>
-
+    <!-- ==========================================
+         LAYAR 1: FINGERPRINT SCANNER
+         ========================================== -->
     <div id="layar-awal" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6">
         <div class="text-center mb-8">
             <h2 class="font-tech text-[#0ea5e9] text-xl md:text-2xl tracking-widest uppercase mb-2">Security System</h2>
@@ -158,6 +162,9 @@
         <p class="text-[#0ea5e9] mt-8 text-sm md:text-base font-tech animate-pulse">Klik sidik jari untuk memindai</p>
     </div>
 
+    <!-- ==========================================
+         LAYAR 2: MINIGAME HACKING FIREWALL
+         ========================================== -->
     <div id="layar-game" class="hidden absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050b14] w-full px-6 opacity-0">
         <div class="text-center mb-10">
             <h2 class="font-tech text-red-500 text-2xl md:text-4xl tracking-widest uppercase mb-2 glitch-text !text-red-500 !shadow-[0_0_15px_rgba(239,68,68,0.8)]">Firewall Terdeteksi!</h2>
@@ -183,9 +190,12 @@
         </div>
     </div>
 
+    <!-- ==========================================
+         LAYAR 3: KERTAS SURAT
+         ========================================== -->
     <div id="kertas-surat" class="opacity-0 translate-y-10 bg-white/95 backdrop-blur-sm text-slate-800 p-8 md:p-12 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-2xl w-[90%] absolute z-40 border border-indigo-100 hidden flex flex-col max-h-[85vh]">
         <div class="mb-6 border-b-2 border-slate-200 pb-4 relative shrink-0">
-            <span class="absolute top-0 right-0 text-[10px] md:text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Apresiasi</span>
+            <span class="absolute top-0 right-0 text-[10px] md:text-xs font-bold text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Memo Perpisahan</span>
             <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">UNTUK:</h2>
             <h1 id="teks-nama" class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mt-1">Nama</h1>
             <p id="teks-jabatan" class="text-sm text-slate-500 font-medium mt-1">Jabatan</p>
@@ -201,32 +211,79 @@
         </div>
 
         <div class="mt-4 border-t-2 border-slate-100 pt-4 text-right opacity-0 transform translate-y-4 transition-all duration-1000 shrink-0" id="ttd-pengirim">
-            <p class="text-slate-400 text-sm font-medium">Salam hormat,</p>
+            <p class="text-slate-400 text-sm font-medium">Tertanda, dengan penuh hormat,</p>
             <h3 class="text-4xl md:text-5xl font-handwriting text-indigo-600 mt-1 select-none">Rifqi & Ibni</h3>
         </div>
     </div>
 
+    <!-- LIBRARY -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
         // 1. DATABASE PESAN
         const databasePesan = {
-            'mas-ibnu': { nama: 'Mas Ibnu', jabatan: 'PT IPPI', teks: 'Teruntuk Mas Ibnu. Rasanya kata terima kasih saja tidak cukup untuk membalas kesabaran dan arahan Mas Ibnu selama kami magang di PT IPPI. Terima kasih sudah mengajari kami dari yang awalnya masih sering bingung, sampai akhirnya kami bisa paham alur sistem di lapangan. Bimbingan Mas Ibnu bener-bener ngebuka wawasan kami tentang gimana dunia industri yang sebenarnya berjalan. Sehat dan sukses terus untuk karir Mas Ibnu ke depannya!' },
-            'pak-dasep': { nama: 'Bapak Dasep', jabatan: 'PT IPPI', teks: 'Kepada Bapak Dasep yang kami hormati. Merupakan sebuah kebanggaan bagi kami berdua bisa belajar dan berkontribusi secara langsung di PT IPPI di bawah bimbingan Bapak. Terima kasih yang tak terhingga atas kepercayaan, ilmu, serta teguran membangun yang selalu Bapak berikan. Nasihat Bapak akan selalu menjadi kompas bagi kami dalam melangkah di dunia kerja nanti. Semoga Bapak senantiasa diberikan kesehatan dan keberkahan.' },
-            'pak-eko': { nama: 'Bapak Eko', jabatan: 'Manager PT IPPI', teks: 'Teruntuk Bapak Eko. Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala dukungan, feedback, dan keterbukaan Bapak dalam membimbing langkah kami di sini. Cara Bapak memimpin dan mengarahkan tim menjadi inspirasi tersendiri bagi kami. Pengalaman berharga ini menjadi fondasi penting bagi karir kami. Mohon maaf atas segala kekurangan kami selama bertugas, Pak. Jaya dan sukses selalu!' },
-            'pak-mury': { nama: 'Bapak Mury', jabatan: 'HRD PT IPPI', teks: 'Kepada Bapak Mury yang kami hormati. Kami sangat bersyukur atas kesempatan luar biasa dan wawasan yang Bapak bagikan selama kami menimba ilmu di PT IPPI. Terima kasih telah menyambut kami dengan hangat sejak hari pertama, serta atas setiap arahan yang membuat kami berkembang menjadi versi yang lebih baik. Semoga keberkahan, kelancaran, dan kebahagiaan selalu menyertai Bapak beserta keluarga.' },
-            'pak-deddy': { nama: 'Bapak Deddy', jabatan: 'PT IPPI', teks: 'Teruntuk Bapak Deddy. Mewakili kami berdua, kami sungguh ingin mengucapkan banyak terima kasih atas waktu, tenaga, dan ilmu yang Bapak luangkan di sela-sela kesibukan Bapak untuk kami. Bimbingan dan diskusi bersama Bapak sangat berarti dalam proses penyelesaian tugas kami di sini. Kami belajar banyak hal berharga. Sehat selalu untuk Bapak, semoga rezekinya senantiasa dilancarkan.' },
-            'pak-yoga': { nama: 'Bapak Yoga', jabatan: 'PT IPPI', teks: 'Kepada Bapak Yoga yang kami hormati. Terima kasih yang sedalam-dalamnya atas arahan yang sangat detail dan wawasan praktis yang Bapak berikan kepada kami. Kesabaran Bapak dalam menjawab pertanyaan dan membimbing kami adalah hal yang sangat kami syukuri dari program magang ini. Semoga PT IPPI semakin maju di bawah inovasi-inovasi Bapak, dan Bapak terus menjadi sosok yang menginspirasi.' },
-            'mas-azka': { nama: 'Mas Azka', jabatan: 'Supervisor Produksi PT IPPI', teks: 'Halo Mas Azka! Lewat pesan singkat ini, kami mau bilang terima kasih banyak karena sudah sangat welcome, asik, dan suportif terhadap kami dari awal sampai akhir magang. Diskusi bareng, masukan, dan cerita-cerita dari Mas Azka beneran sangat membantu kelancaran project kami sekaligus bikin suasana kerja jadi lebih hidup. Harapan terbaik untuk karir dan kehidupan Mas Azka ke depannya!' },
-            'mas-adi': { nama: 'Mas Adi', jabatan: 'PT IPPI', teks: 'Teruntuk Mas Adi. Terima kasih banyak atas kolaborasi yang seru, bantuan tanpa henti, dan suasana kerja yang hangat selama kami berada di PT IPPI. Kami bener-bener mengapresiasi setiap bantuan teknis, wejangan, maupun dukungan moril dari Mas Adi di saat kami lagi buntu ngerjain tugas. Jaga kesehatan terus, Mas. Sampai jumpa lagi di puncak kesuksesan nanti!' },
-            'mas-yugo': { nama: 'Mas Yugo', jabatan: 'Supervisor Maintenance PT IPPI', teks: 'Halo Mas Yugo. Terima kasih banyak atas bimbingan dan kesediaan Mas Yugo membagikan pengalaman asli di lapangan kepada kami. Melihat langsung cara Mas Yugo nge-handle problem bener-bener jadi bekal berharga yang akan terus kami bawa. Kami memohon maaf jika selama di sini ada salah kata maupun perbuatan yang kurang berkenan. Sukses dan jaya terus, Mas!' },
-            'pak-amel': { nama: 'Bapak Amel', jabatan: 'PT IPPI', teks: 'Teruntuk Bapak Amel. Melalui surat kecil ini, kami ingin menyampaikan rasa terima kasih atas setiap arahan, keramahan, dan kesempatan berharga yang telah diberikan kepada kami. Pengalaman magang di PT IPPI menjadi sebuah perjalanan dan memori yang luar biasa, dan itu semua berkat dukungan dari Bapak. Semoga Bapak selalu diberikan kesehatan dan kemudahan dalam segala hal.' },
-            'default': { nama: 'Keluarga Besar PT IPPI', jabatan: 'PT IPPI', teks: 'Kepada seluruh Keluarga Besar PT IPPI, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya atas kesempatan berharga, arahan, dan bimbingan selama kami melaksanakan program magang di sini. Terima kasih telah menerima kami dengan tangan terbuka. Mohon maaf yang setulus-tulusnya atas segala kekurangan dan kesalahan kami. Semoga PT IPPI semakin meroket sukses dan jaya selalu.' }
+            // === KELOMPOK KHUSUS (YANG NGASIH ILMU & BIMBINGAN) ===
+            'mas-ibnu': { 
+                nama: 'Mas Ibnu', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Mas Ibnu. Rasanya kata terima kasih saja tidak cukup untuk membalas kesabaran dan arahan Mas Ibnu selama kami magang di sini. Terima kasih sudah mengajari kami dari yang awalnya masih sering bingung, sampai akhirnya kami berdua bisa paham alur sistem di lapangan. Ilmu dari Mas Ibnu bener-bener ngebuka wawasan kami. Sehat dan sukses terus untuk karir Mas Ibnu ke depannya!' 
+            },
+            'pak-mury': { 
+                nama: 'Bapak Mury', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Kepada Bapak Mury yang kami hormati. Kami sangat bersyukur atas kesempatan luar biasa dan ilmu yang Bapak bagikan selama kami magang. Terima kasih atas setiap arahan dan pengetahuan yang membuat kami berkembang menjadi versi yang lebih baik. Semoga keberkahan, kelancaran, dan kebahagiaan selalu menyertai Bapak beserta keluarga.' 
+            },
+            'mas-azka': { 
+                nama: 'Mas Azka', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Mas Azka. Kami mengucapkan terima kasih yang sebesar-besarnya atas bimbingan dan ilmu yang telah diberikan kepada kami dari awal hingga akhir masa magang. Diskusi dan masukan teknis dari Mas Azka sangat membantu kelancaran proyek dan menambah wawasan kami. Semoga sukses selalu untuk karir Mas Azka ke depannya.' 
+            },
+            'mas-yugo': { 
+                nama: 'Mas Yugo', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Mas Yugo. Terima kasih banyak atas bimbingan dan kesediaan Mas Yugo membagikan pengalaman asli serta ilmu problem solving di lapangan kepada kami. Melihat langsung cara Mas Yugo menangani masalah benar-benar menjadi bekal berharga yang menambah wawasan kami berdua. Sukses dan jaya terus, Mas!' 
+            },
+            'pak-amel': { 
+                nama: 'Bapak Amel', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Bapak Amel. Melalui pesan ini, kami ingin menyampaikan rasa terima kasih atas setiap arahan, keramahan, serta ilmu berharga yang telah diberikan kepada kami. Pengetahuan yang Bapak bagikan membuat pengalaman magang kami menjadi sangat bermanfaat dan membekas. Semoga Bapak selalu diberikan kesehatan dan kemudahan dalam segala hal.' 
+            },
+            'mas-adi': { 
+                nama: 'Mas Adi', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Mas Adi. Terima kasih banyak atas kolaborasi, ilmu teknis, dan kesabaran Mas Adi dalam membimbing kami berdua. Kami sangat mengapresiasi setiap arahan dan pengetahuan berharga dari Mas Adi pada saat kami mengerjakan tugas. Jaga kesehatan selalu, Mas. Sampai jumpa di puncak kesuksesan!' 
+            },
+
+            // === KELOMPOK GENERAL (TO THE POINT) ===
+            'pak-dasep': { 
+                nama: 'Bapak Dasep', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Kepada Bapak Dasep yang kami hormati. Terima kasih atas kesempatan dan penerimaan yang baik selama kami magang. Kami memohon maaf atas segala kekurangan kami. Semoga Bapak senantiasa diberikan kesehatan dan kesuksesan.' 
+            },
+            'pak-eko': { 
+                nama: 'Bapak Eko', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Bapak Eko. Kami mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan baik untuk melaksanakan magang. Mohon maaf atas segala kekurangan kami selama berada di sini, Pak. Jaya dan sukses selalu!' 
+            },
+            'pak-deddy': { 
+                nama: 'Bapak Deddy', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Teruntuk Bapak Deddy. Mewakili kami berdua, kami mengucapkan terima kasih atas sambutan dan penerimaan yang hangat selama kami berada di sini. Sehat selalu untuk Bapak, semoga rezekinya senantiasa dilancarkan.' 
+            },
+            'pak-yoga': { 
+                nama: 'Bapak Yoga', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Kepada Bapak Yoga yang kami hormati. Terima kasih atas kesempatan dan penerimaan Bapak selama kami menjalankan program magang. Semoga PT IPPI Karawang semakin maju dan Bapak selalu diberikan kesehatan serta kelancaran.' 
+            },
+            'default': { 
+                nama: 'Keluarga Besar PT IPPI Karawang', 
+                jabatan: 'PT IPPI Karawang', 
+                teks: 'Kepada seluruh Keluarga Besar PT IPPI Karawang, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan tangan terbuka selama program magang ini. Mohon maaf atas segala kekurangan kami. Semoga PT IPPI Karawang semakin meroket sukses dan jaya selalu.' 
+            }
         };
 
-        // PESAN PENUTUP (Lebih asik, profesional, nggak lebay)
-        const pesanPenutupUniversal = "^500 Pengalaman magang di sini benar-benar memberikan kami wawasan baru dan bekal penting untuk terjun ke dunia industri yang sebenarnya. Terima kasih atas semua waktu dan bimbingan yang telah diberikan. ^500 Kami izin pamit menyelesaikan program ini. Sukses terus untuk semuanya, semoga kita bisa berkolaborasi lagi di lain kesempatan! ^1000";
+        const pesanPenutupUniversal = "^500 Banyak tawa, canda, diskusi, dan pelajaran berharga yang kami lewati di tempat ini. Terima kasih telah menjadikan perjalanan magang kami begitu berwarna dan berkesan. ^500 Kami pamit undur diri, namun kenangan kebersamaan di PT IPPI akan selalu mendapat tempat khusus di hati kami berdua. ^1000";
 
         const urlParams = new URLSearchParams(window.location.search);
         let idUntuk = urlParams.get('untuk');
