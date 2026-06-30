@@ -223,145 +223,65 @@
     <script>
         // 1. DATABASE PESAN
         const databasePesan = {
-            // === KELOMPOK KHUSUS (YANG NGASIH ILMU & BIMBINGAN) ===
-            'mas-ibnu': { 
-                nama: 'Mas Ibnu', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Terima kasih banyak atas semua kebaikan, perhatian, dan ilmu yang sudah Mas berikan kepada kami selama menjalani masa magang di PT IPPI Karawang. 
+        // === KELOMPOK KHUSUS (YANG NGASIH ILMU & BIMBINGAN) ===
+        'mas-ibnu': { 
+            nama: 'Mas Ibnu', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Terima kasih banyak atas semua kebaikan, perhatian, dan ilmu yang sudah Mas berikan kepada kami selama menjalani masa magang di PT IPPI Karawang.<br><br>Dari awal kami masuk hingga akhirnya harus meninggalkan ruangan ini, Mas selalu menjadi rekan seruangan yang ramah, welcome, dan membuat kami merasa nyaman untuk belajar serta berkembang. Terima kasih juga karena sudah sering memperhatikan kami, baik dalam pekerjaan maupun hal-hal sederhana di luar pekerjaan. Bahkan momen seperti saat Mas mengajak kami makan di luar pun menjadi salah satu kenangan yang akan selalu kami ingat.<br><br>Walaupun kesan pertama Mas terlihat tegas, kami justru belajar bahwa di balik ketegasan itu ada sosok yang baik, peduli, dan tidak pernah ragu untuk berbagi ilmu. Setiap masukan dan penjelasan yang Mas berikan sangat membantu kami dalam memahami banyak hal selama magang. Bagi kami, Mas Ibnu juga menjadi salah satu sosok alumni yang patut dijadikan contoh. Semangat kerja, tanggung jawab, dan dedikasi Mas dalam bekerja benar-benar menginspirasi kami untuk terus belajar dan berkembang. Melihat perjalanan Mas membuat kami semakin termotivasi untuk mempersiapkan diri menghadapi dunia kerja nantinya.<br><br>Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas. Terima kasih karena selalu menerima kami dengan baik sejak hari pertama hingga akhir masa magang.<br><br>Semoga Mas Ibnu selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas terus berkembang seiring dengan ilmu, kemampuan, dan kerja keras yang Mas miliki. Kami yakin masih banyak pencapaian besar yang akan Mas raih di masa depan.<br><br>See you on top, Mas! Terima kasih atas semua ilmu, perhatian, dan kebaikan yang sudah Mas berikan kepada kami. Semoga suatu saat nanti kami juga bisa menyusul jejak Mas sebagai alumni yang membanggakan. Jangan lupa doakan kami juga ya, Mas. Semoga kita semua dipertemukan lagi dengan cerita-cerita kesuksesan masing-masing.' 
+        },
+        'pak-mury': { 
+            nama: 'Bapak Mury', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kepada Bapak Mury yang kami hormati. Kami sangat bersyukur atas kesempatan luar biasa dan ilmu yang Bapak bagikan selama kami magang.<br><br>Terima kasih atas setiap arahan dan pengetahuan yang membuat kami berkembang menjadi versi yang lebih baik.<br><br>Semoga keberkahan, kelancaran, dan kebahagiaan selalu menyertai Bapak beserta keluarga.' 
+        },
+        'mas-azka': { 
+            nama: 'Mas Azka', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas semua bimbingan, waktu, dan perhatian yang sudah Mas Azka berikan selama kami menjalani masa magang di PT IPPI Karawang. Terima kasih juga karena sudah menjadi pembimbing industri yang selalu membantu dan memudahkan setiap proses, baik dari sisi akademis maupun teknis selama kami berada di lingkungan kerja.<br><br>Sejak awal magang hingga akhirnya kami bisa menyelesaikan program ini, Mas Azka selalu menjadi orang pertama yang siap membantu setiap kali kami membutuhkan sesuatu. Mulai dari kebutuhan administrasi kampus, koordinasi dengan pihak perusahaan, hingga berbagai kebutuhan untuk proyek dan tugas akhir kami, semuanya selalu dibantu dengan cepat tanpa pernah mempersulit. Hal-hal yang mungkin terlihat sederhana itu justru sangat berarti bagi kami, karena membuat setiap tahapan magang dapat berjalan dengan lebih lancar dan memberikan kami ruang untuk lebih fokus belajar serta menyelesaikan tanggung jawab yang ada.<br><br>Terima kasih juga karena sudah banyak berbagi cerita, pengalaman, dan energi positif kepada kami. Cara Mas Azka membimbing dan berdiskusi membuat kami lebih cepat beradaptasi, lebih percaya diri, dan merasa nyaman selama berada di lingkungan kerja.<br><br>Kami juga ingin menyampaikan bahwa sistem yang kami bangun selama magang ini sebenarnya adalah sesuatu yang sangat kami harapkan bisa digunakan dan diimplementasikan secara langsung di jalur. Walaupun pada akhirnya karena berbagai kondisi implementasi tersebut belum dapat dilakukan dalam masa magang kami, kami tetap bersyukur karena Mas Azka selalu mendukung setiap proses pengembangannya dari awal hingga selesai. Semoga pada tahap selanjutnya sistem ini dapat terus dikembangkan, benar-benar diterapkan di lapangan, dan memberikan manfaat bagi perusahaan. Kami juga berharap Mas Azka dapat terus mengawal dan memonitor pengembangannya sehingga sistem ini bisa berjalan dengan baik sesuai tujuan yang diharapkan.<br><br>Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas Azka. Terima kasih karena sudah menjadi mentor yang sabar, selalu meluangkan waktu untuk membimbing kami, dan tidak pernah lelah menjawab berbagai pertanyaan kami.<br><br>Semoga Mas Azka selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas Azka terus berkembang, semakin sukses, dan setiap usaha serta kerja keras yang dilakukan selalu membuahkan hasil terbaik. Semoga segala kebaikan yang Mas Azka berikan kepada kami menjadi amal baik dan dibalas dengan keberkahan dalam kehidupan maupun karier Mas ke depannya.<br><br>Terakhir, kami ingin mengucapkan terima kasih sekali lagi atas semua yang telah Mas Azka berikan kepada kami. Bagi kami, Mas Azka bukan hanya seorang pembimbing industri, tetapi juga menjadi bagian dari awal perjalanan karier kami. Kami akan selalu mengingat semua ilmu, pengalaman, arahan, dan kebaikan yang kami dapatkan selama belajar bersama Mas. Terima kasih sudah menjadi salah satu orang yang membuat perjalanan magang ini begitu berkesan.<br><br>Semoga suatu saat nanti, ketika kami sudah berada di dunia kerja, kami bisa membawa nilai-nilai dan pelajaran yang Mas Azka ajarkan kepada kami. See you on top, Mas. Semoga kita dipertemukan lagi dengan cerita-cerita terbaik di masa depan.' 
+        },
+        'mas-yugo': { 
+            nama: 'Mas Yugo', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kami ingin mengucapkan terima kasih banyak atas semua bantuan, dukungan, dan kebaikan yang sudah Mas Yugo berikan selama kami menjalani masa magang di PT IPPI Karawang.<br><br>Terima kasih karena sudah banyak membantu kami dalam proses pengembangan proyek digitalisasi ini. Berbagai informasi, data, serta penjelasan mengenai problem yang Mas berikan sangat membantu kami dalam memahami kebutuhan sistem dan menyelesaikan pengembangan proyek dengan lebih baik. Diskusi-diskusi singkat yang sering kami lakukan juga memberikan banyak sudut pandang baru yang sangat bermanfaat bagi kami.<br><br>Walaupun kami berada di divisi yang berbeda, Mas Yugo tetap selalu terbuka dan tidak pernah ragu untuk membantu ketika kami membutuhkan sesuatu. Setiap kali kami meminta bantuan atau berdiskusi, Mas selalu merespons dengan baik tanpa pernah mempersulit. Sikap yang ramah dan rendah hati itu membuat kami merasa nyaman untuk belajar dan bertanya.<br><br>Terima kasih juga karena sudah sering memberikan semangat dan dukungan kepada kami, baik secara langsung maupun tidak langsung. Hal-hal sederhana seperti itu ternyata sangat berarti dan menjadi salah satu alasan kami merasa nyaman selama masa magang.<br><br>Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas.<br><br>Semoga Mas Yugo selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas terus berkembang, semakin sukses, dan semua target serta impian yang ingin dicapai dapat terwujud seiring dengan kemampuan luar biasa yang Mas miliki.<br><br>Terima kasih sekali lagi atas semua bantuan, ilmu, dan semangat yang sudah Mas berikan kepada kami. Semoga suatu saat nanti kita dapat dipertemukan kembali dalam kesempatan yang baik. See you on top, Mas! Sukses selalu, dan semangat untuk terus berkembang Mas.' 
+        },
+        'pak-amel': { 
+            nama: 'Bapak Amel', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala bantuan, arahan, dan waktu yang telah Bapak berikan selama kami menjalani masa magang di PT IPPI Karawang.<br><br>Terima kasih karena telah banyak membantu kami dalam proses pengembangan proyek digitalisasi ini. Setiap masukan, saran, dan pengalaman yang Bapak bagikan sangat berarti bagi kami dalam menyempurnakan sistem yang sedang kami kembangkan. Berkat bimbingan Bapak, kami dapat memahami banyak hal yang sebelumnya belum kami ketahui, sehingga proses pengembangan sistem dapat berjalan dengan lebih baik.<br><br>Kami juga sangat mengapresiasi kesediaan Bapak untuk selalu membantu kami di tengah kesibukan pekerjaan Bapak. Kami menyadari bahwa Bapak memiliki banyak tanggung jawab lain, namun Bapak tetap meluangkan waktu untuk berdiskusi, menjawab pertanyaan kami, dan memberikan solusi ketika kami mengalami kendala. Kebaikan dan kepedulian tersebut tentu menjadi pengalaman yang sangat berharga bagi kami.<br><br>Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Bapak.<br><br>Semoga Bapak selalu diberikan kesehatan, kebahagiaan, serta kemudahan dalam setiap pekerjaan dan aktivitas. Semoga segala usaha dan dedikasi yang telah Bapak berikan senantiasa membuahkan hasil terbaik, dan semoga Bapak selalu diberikan kesuksesan dalam setiap langkah ke depannya. Terakhir, kami juga mohon doa dan restunya agar perjalanan akademis maupun karier kami ke depan selalu diberikan kelancaran dan kemudahan.<br><br>Terima kasih banyak atas segala ilmu, bantuan, dan kebaikan yang telah Bapak berikan kepada kami. Semoga kita dapat dipertemukan kembali di lain kesempatan dengan kabar dan pencapaian yang sama-sama membanggakan.' 
+        },
+        'mas-adi': { 
+            nama: 'Mas Adi', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Terima kasih banyak atas semua bantuan dan waktu yang sudah Mas Adi luangkan selama kami menjalani masa magang di PT IPPI Karawang. Walaupun mungkin Mas sering bilang "santai aja", tapi sebenarnya bantuan Mas benar-benar berarti buat kami.<br><br>Banyak hal yang kami pelajari berkat penjelasan Mas, terutama saat kami kesulitan memahami data, alur pekerjaan, sampai cara menghitung dan menganalisis berbagai kebutuhan untuk proyek kami. Cara Mas menjelaskan selalu mudah dipahami, jadi setiap kali selesai berdiskusi rasanya kami jadi jauh lebih paham.<br><br>Terima kasih juga karena sudah membuat suasana magang jadi lebih menyenangkan. Dari ngobrol santai, bercanda, ngajak main, sampai sering tiba-tiba traktir jajanan, semuanya jadi bagian dari kenangan yang bikin kami betah selama di IPPI. Hal-hal sederhana seperti itu ternyata sangat berarti dan membuat kami merasa diterima di lingkungan kerja.<br><br>Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas. Terima kasih karena selalu sabar menghadapi berbagai pertanyaan kami, bahkan pertanyaan yang mungkin berulang-ulang.<br><br>Satu hal yang mungkin jarang kami sampaikan secara langsung, menurut kami Mas Adi itu orang yang hebat. Cara Mas memahami pekerjaan, menjelaskan sesuatu dengan sederhana, dan menghadapi berbagai situasi dengan penuh percaya diri benar-benar jadi hal yang kami kagumi. Semoga Mas juga selalu menyadari bahwa kemampuan yang Mas miliki adalah salah satu kekuatan terbesar yang bisa membawa Mas melangkah jauh.<br><br>Semoga karier Mas Adi terus berkembang sesuai dengan kemampuan luar biasa yang Mas miliki. Semoga semua cita-cita dan impian Mas bisa tercapai, selalu diberikan kesehatan, kebahagiaan, serta dipermudah dalam setiap langkah. Kami yakin masih banyak hal besar yang menanti Mas di depan.<br><br>See you on top, Mas! Terima kasih banyak atas semua ilmu, bantuan, cerita, dan kebaikan yang sudah Mas berikan. Semoga suatu hari nanti kami bisa bertemu lagi sebagai rekan profesional, dan semoga saat itu Mas sudah berada di posisi yang memang pantas untuk kemampuan Mas. Sukses selalu, Mas! 🚀' 
+        },
 
-        Dari awal kami masuk hingga akhirnya harus meninggalkan ruangan ini, Mas selalu menjadi rekan seruangan yang ramah, welcome, dan membuat kami merasa nyaman untuk belajar serta berkembang. Terima kasih juga karena sudah sering memperhatikan kami, baik dalam pekerjaan maupun hal-hal sederhana di luar pekerjaan. Bahkan momen seperti saat Mas mengajak kami makan di luar pun menjadi salah satu kenangan yang akan selalu kami ingat. 
-
-        Walaupun kesan pertama Mas terlihat tegas, kami justru belajar bahwa di balik ketegasan itu ada sosok yang baik, peduli, dan tidak pernah ragu untuk berbagi ilmu. Setiap masukan dan penjelasan yang Mas berikan sangat membantu kami dalam memahami banyak hal selama magang. Bagi kami, Mas Ibnu juga menjadi salah satu sosok alumni yang patut dijadikan contoh. Semangat kerja, tanggung jawab, dan dedikasi Mas dalam bekerja benar-benar menginspirasi kami untuk terus belajar dan berkembang. Melihat perjalanan Mas membuat kami semakin termotivasi untuk mempersiapkan diri menghadapi dunia kerja nantinya. 
-
-        Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas. Terima kasih karena selalu menerima kami dengan baik sejak hari pertama hingga akhir masa magang. 
-
-        Semoga Mas Ibnu selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas terus berkembang seiring dengan ilmu, kemampuan, dan kerja keras yang Mas miliki. Kami yakin masih banyak pencapaian besar yang akan Mas raih di masa depan. 
-
-        See you on top, Mas! Terima kasih atas semua ilmu, perhatian, dan kebaikan yang sudah Mas berikan kepada kami. Semoga suatu saat nanti kami juga bisa menyusul jejak Mas sebagai alumni yang membanggakan. Jangan lupa doakan kami juga ya, Mas. Semoga kita semua dipertemukan lagi dengan cerita-cerita kesuksesan masing-masing.` 
-            },
-            'pak-mury': { 
-                nama: 'Bapak Mury', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kepada Bapak Mury yang kami hormati. Kami sangat bersyukur atas kesempatan luar biasa dan ilmu yang Bapak bagikan selama kami magang. 
-
-        Terima kasih atas setiap arahan dan pengetahuan yang membuat kami berkembang menjadi versi yang lebih baik. 
-
-        Semoga keberkahan, kelancaran, dan kebahagiaan selalu menyertai Bapak beserta keluarga.` 
-            },
-            'mas-azka': { 
-                nama: 'Mas Azka', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas semua bimbingan, waktu, dan perhatian yang sudah Mas Azka berikan selama kami menjalani masa magang di PT IPPI Karawang. Terima kasih juga karena sudah menjadi pembimbing industri yang selalu membantu dan memudahkan setiap proses, baik dari sisi akademis maupun teknis selama kami berada di lingkungan kerja. 
-
-        Sejak awal magang hingga akhirnya kami bisa menyelesaikan program ini, Mas Azka selalu menjadi orang pertama yang siap membantu setiap kali kami membutuhkan sesuatu. Mulai dari kebutuhan administrasi kampus, koordinasi dengan pihak perusahaan, hingga berbagai kebutuhan untuk proyek dan tugas akhir kami, semuanya selalu dibantu dengan cepat tanpa pernah mempersulit. Hal-hal yang mungkin terlihat sederhana itu justru sangat berarti bagi kami, karena membuat setiap tahapan magang dapat berjalan dengan lebih lancar dan memberikan kami ruang untuk lebih fokus belajar serta menyelesaikan tanggung jawab yang ada. 
-
-        Terima kasih juga karena sudah banyak berbagi cerita, pengalaman, dan energi positif kepada kami. Cara Mas Azka membimbing dan berdiskusi membuat kami lebih cepat beradaptasi, lebih percaya diri, dan merasa nyaman selama berada di lingkungan kerja. 
-
-        Kami juga ingin menyampaikan bahwa sistem yang kami bangun selama magang ini sebenarnya adalah sesuatu yang sangat kami harapkan bisa digunakan dan diimplementasikan secara langsung di jalur. Walaupun pada akhirnya karena berbagai kondisi implementasi tersebut belum dapat dilakukan dalam masa magang kami, kami tetap bersyukur karena Mas Azka selalu mendukung setiap proses pengembangannya dari awal hingga selesai. Semoga pada tahap selanjutnya sistem ini dapat terus dikembangkan, benar-benar diterapkan di lapangan, dan memberikan manfaat bagi perusahaan. Kami juga berharap Mas Azka dapat terus mengawal dan memonitor pengembangannya sehingga sistem ini bisa berjalan dengan baik sesuai tujuan yang diharapkan. 
-
-        Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas Azka. Terima kasih karena sudah menjadi mentor yang sabar, selalu meluangkan waktu untuk membimbing kami, dan tidak pernah lelah menjawab berbagai pertanyaan kami. 
-
-        Semoga Mas Azka selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas Azka terus berkembang, semakin sukses, dan setiap usaha serta kerja keras yang dilakukan selalu membuahkan hasil terbaik. Semoga segala kebaikan yang Mas Azka berikan kepada kami menjadi amal baik dan dibalas dengan keberkahan dalam kehidupan maupun karier Mas ke depannya. 
-
-        Terakhir, kami ingin mengucapkan terima kasih sekali lagi atas semua yang telah Mas Azka berikan kepada kami. Bagi kami, Mas Azka bukan hanya seorang pembimbing industri, tetapi juga menjadi bagian dari awal perjalanan karier kami. Kami akan selalu mengingat semua ilmu, pengalaman, arahan, dan kebaikan yang kami dapatkan selama belajar bersama Mas. Terima kasih sudah menjadi salah satu orang yang membuat perjalanan magang ini begitu berkesan. 
-
-        Semoga suatu saat nanti, ketika kami sudah berada di dunia kerja, kami bisa membawa nilai-nilai dan pelajaran yang Mas Azka ajarkan kepada kami. See you on top, Mas. Semoga kita dipertemukan lagi dengan cerita-cerita terbaik di masa depan.` 
-            },
-            'mas-yugo': { 
-                nama: 'Mas Yugo', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kami ingin mengucapkan terima kasih banyak atas semua bantuan, dukungan, dan kebaikan yang sudah Mas Yugo berikan selama kami menjalani masa magang di PT IPPI Karawang.
-
-        Terima kasih karena sudah banyak membantu kami dalam proses pengembangan proyek digitalisasi ini. Berbagai informasi, data, serta penjelasan mengenai problem yang Mas berikan sangat membantu kami dalam memahami kebutuhan sistem dan menyelesaikan pengembangan proyek dengan lebih baik. Diskusi-diskusi singkat yang sering kami lakukan juga memberikan banyak sudut pandang baru yang sangat bermanfaat bagi kami.
-
-        Walaupun kami berada di divisi yang berbeda, Mas Yugo tetap selalu terbuka dan tidak pernah ragu untuk membantu ketika kami membutuhkan sesuatu. Setiap kali kami meminta bantuan atau berdiskusi, Mas selalu merespons dengan baik tanpa pernah mempersulit. Sikap yang ramah dan rendah hati itu membuat kami merasa nyaman untuk belajar dan bertanya.
-
-        Terima kasih juga karena sudah sering memberikan semangat dan dukungan kepada kami, baik secara langsung maupun tidak langsung. Hal-hal sederhana seperti itu ternyata sangat berarti dan menjadi salah satu alasan kami merasa nyaman selama masa magang. 
-
-        Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas. 
-
-        Semoga Mas Yugo selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah. Semoga karier Mas terus berkembang, semakin sukses, dan semua target serta impian yang ingin dicapai dapat terwujud seiring dengan kemampuan luar biasa yang Mas miliki. 
-
-        Terima kasih sekali lagi atas semua bantuan, ilmu, dan semangat yang sudah Mas berikan kepada kami. Semoga suatu saat nanti kita dapat dipertemukan kembali dalam kesempatan yang baik. See you on top, Mas! Sukses selalu, dan semangat untuk terus berkembang Mas.` 
-            },
-            'pak-amel': { 
-                nama: 'Bapak Amel', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala bantuan, arahan, dan waktu yang telah Bapak berikan selama kami menjalani masa magang di PT IPPI Karawang. 
-
-        Terima kasih karena telah banyak membantu kami dalam proses pengembangan proyek digitalisasi ini. Setiap masukan, saran, dan pengalaman yang Bapak bagikan sangat berarti bagi kami dalam menyempurnakan sistem yang sedang kami kembangkan. Berkat bimbingan Bapak, kami dapat memahami banyak hal yang sebelumnya belum kami ketahui, sehingga proses pengembangan sistem dapat berjalan dengan lebih baik. 
-
-        Kami juga sangat mengapresiasi kesediaan Bapak untuk selalu membantu kami di tengah kesibukan pekerjaan Bapak. Kami menyadari bahwa Bapak memiliki banyak tanggung jawab lain, namun Bapak tetap meluangkan waktu untuk berdiskusi, menjawab pertanyaan kami, dan memberikan solusi ketika kami mengalami kendala. Kebaikan dan kepedulian tersebut tentu menjadi pengalaman yang sangat berharga bagi kami. 
-
-        Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Bapak. 
-
-        Semoga Bapak selalu diberikan kesehatan, kebahagiaan, serta kemudahan dalam setiap pekerjaan dan aktivitas. Semoga segala usaha dan dedikasi yang telah Bapak berikan senantiasa membuahkan hasil terbaik, dan semoga Bapak selalu diberikan kesuksesan dalam setiap langkah ke depannya. Terakhir, kami juga mohon doa dan restunya agar perjalanan akademis maupun karier kami ke depan selalu diberikan kelancaran dan kemudahan. 
-
-        Terima kasih banyak atas segala ilmu, bantuan, dan kebaikan yang telah Bapak berikan kepada kami. Semoga kita dapat dipertemukan kembali di lain kesempatan dengan kabar dan pencapaian yang sama-sama membanggakan.` 
-            },
-            'mas-adi': { 
-                nama: 'Mas Adi', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Terima kasih banyak atas semua bantuan dan waktu yang sudah Mas Adi luangkan selama kami menjalani masa magang di PT IPPI Karawang. Walaupun mungkin Mas sering bilang "santai aja", tapi sebenarnya bantuan Mas benar-benar berarti buat kami.
-
-        Banyak hal yang kami pelajari berkat penjelasan Mas, terutama saat kami kesulitan memahami data, alur pekerjaan, sampai cara menghitung dan menganalisis berbagai kebutuhan untuk proyek kami. Cara Mas menjelaskan selalu mudah dipahami, jadi setiap kali selesai berdiskusi rasanya kami jadi jauh lebih paham.
-
-        Terima kasih juga karena sudah membuat suasana magang jadi lebih menyenangkan. Dari ngobrol santai, bercanda, ngajak main, sampai sering tiba-tiba traktir jajanan, semuanya jadi bagian dari kenangan yang bikin kami betah selama di IPPI. Hal-hal sederhana seperti itu ternyata sangat berarti dan membuat kami merasa diterima di lingkungan kerja. 
-
-        Kami juga ingin meminta maaf apabila selama kurang lebih enam bulan ini ada perkataan, sikap, atau hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Mas. Terima kasih karena selalu sabar menghadapi berbagai pertanyaan kami, bahkan pertanyaan yang mungkin berulang-ulang. 
-
-        Satu hal yang mungkin jarang kami sampaikan secara langsung, menurut kami Mas Adi itu orang yang hebat. Cara Mas memahami pekerjaan, menjelaskan sesuatu dengan sederhana, dan menghadapi berbagai situasi dengan penuh percaya diri benar-benar jadi hal yang kami kagumi. Semoga Mas juga selalu menyadari bahwa kemampuan yang Mas miliki adalah salah satu kekuatan terbesar yang bisa membawa Mas melangkah jauh. 
-
-        Semoga karier Mas Adi terus berkembang sesuai dengan kemampuan luar biasa yang Mas miliki. Semoga semua cita-cita dan impian Mas bisa tercapai, selalu diberikan kesehatan, kebahagiaan, serta dipermudah dalam setiap langkah. Kami yakin masih banyak hal besar yang menanti Mas di depan. 
-
-        See you on top, Mas! Terima kasih banyak atas semua ilmu, bantuan, cerita, dan kebaikan yang sudah Mas berikan. Semoga suatu hari nanti kami bisa bertemu lagi sebagai rekan profesional, dan semoga saat itu Mas sudah berada di posisi yang memang pantas untuk kemampuan Mas. Sukses selalu, Mas! 🚀` 
-            },
-
-            // === KELOMPOK GENERAL (TO THE POINT) ===
-            'pak-dasep': { 
-                nama: 'Bapak Dasep', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala bantuan, perhatian, dan kebaikan yang telah Bapak berikan selama kami menjalani masa magang di PT IPPI Karawang. 
-
-        Terima kasih karena telah banyak membantu kami dalam proses pengerjaan proyek digitalisasi ini. Bapak juga banyak memberikan masukan dan membantu kami dalam merancang fitur Quality Problem Report (QPR), sehingga kami dapat memahami kebutuhan sistem dengan lebih baik. 
-
-        Kami juga ingin mengucapkan terima kasih karena sejak hari pertama kami datang, Bapak telah menyambut kami dengan sangat baik dan menerima kami sebagai bagian dari lingkungan kerja. Selama kurang lebih enam bulan berada dalam satu ruangan bersama Bapak, kami selalu merasakan suasana yang nyaman dan menyenangkan. Sikap Bapak yang ramah dan baik kepada kami membuat proses belajar serta beradaptasi di lingkungan kerja menjadi jauh lebih mudah. 
-
-        Kami juga ingin meminta maaf apabila selama masa magang ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Bapak. 
-
-        Semoga Bapak senantiasa diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap aktivitas. Semoga Bapak juga selalu diberikan kesuksesan, keberkahan, serta perlindungan dalam menjalankan setiap pekerjaan dan tanggung jawab. 
-
-        Terima kasih sekali lagi atas segala bantuan dan kebaikan yang telah Bapak berikan kepada kami. Kami berharap suatu saat nanti kita dapat dipertemukan kembali dalam kesempatan yang baik. Semoga saat itu kami dapat berbagi cerita dan kabar terbaik tentang perjalanan kami masing-masing.` 
-            },
-            'pak-eko': { 
-                nama: 'Bapak Eko', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Teruntuk Bapak Eko. Kami mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan baik untuk melaksanakan magang. 
-
-        Mohon maaf atas segala kekurangan kami selama berada di sini, Pak. Jaya dan sukses selalu!` 
-            },
-            'pak-deddy': { 
-                nama: 'Bapak Deddy', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Teruntuk Bapak Deddy. Mewakili kami berdua, kami mengucapkan terima kasih atas sambutan dan penerimaan yang hangat selama kami berada di sini. 
-
-        Sehat selalu untuk Bapak, semoga rezekinya senantiasa dilancarkan.` 
-            },
-            'pak-yoga': { 
-                nama: 'Bapak Yoga', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kepada Bapak Yoga yang kami hormati. Terima kasih atas kesempatan dan penerimaan Bapak selama kami menjalankan program magang. 
-
-        Semoga PT IPPI Karawang semakin maju dan Bapak selalu diberikan kesehatan serta kelancaran.` 
-            },
-            'default': { 
-                nama: 'Keluarga Besar PT IPPI Karawang', 
-                jabatan: 'PT IPPI Karawang', 
-                teks: `Kepada seluruh Keluarga Besar PT IPPI Karawang, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan tangan terbuka selama program magang ini. 
-
-        Mohon maaf atas segala kekurangan kami. Semoga PT IPPI Karawang semakin meroket sukses dan jaya selalu.` 
-            }
-        };
+        // === KELOMPOK GENERAL (TO THE POINT) ===
+        'pak-dasep': { 
+            nama: 'Bapak Dasep', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kami ingin mengucapkan terima kasih yang sebesar-besarnya atas segala bantuan, perhatian, dan kebaikan yang telah Bapak berikan selama kami menjalani masa magang di PT IPPI Karawang.<br><br>Terima kasih karena telah banyak membantu kami dalam proses pengerjaan proyek digitalisasi ini. Bapak juga banyak memberikan masukan dan membantu kami dalam merancang fitur Quality Problem Report (QPR), sehingga kami dapat memahami kebutuhan sistem dengan lebih baik.<br><br>Kami juga ingin mengucapkan terima kasih karena sejak hari pertama kami datang, Bapak telah menyambut kami dengan sangat baik dan menerima kami sebagai bagian dari lingkungan kerja. Selama kurang lebih enam bulan berada dalam satu ruangan bersama Bapak, kami selalu merasakan suasana yang nyaman dan menyenangkan. Sikap Bapak yang ramah dan baik kepada kami membuat proses belajar serta beradaptasi di lingkungan kerja menjadi jauh lebih mudah.<br><br>Kami juga ingin meminta maaf apabila selama masa magang ini ada perkataan, sikap, ataupun hal-hal yang tanpa sadar kurang berkenan ataupun sempat merepotkan Bapak.<br><br>Semoga Bapak senantiasa diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap aktivitas. Semoga Bapak juga selalu diberikan kesuksesan, keberkahan, serta perlindungan dalam menjalankan setiap pekerjaan dan tanggung jawab.<br><br>Terima kasih sekali lagi atas segala bantuan dan kebaikan yang telah Bapak berikan kepada kami. Kami berharap suatu saat nanti kita dapat dipertemukan kembali dalam kesempatan yang baik. Semoga saat itu kami dapat berbagi cerita dan kabar terbaik tentang perjalanan kami masing-masing.' 
+        },
+        'pak-eko': { 
+            nama: 'Bapak Eko', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Teruntuk Bapak Eko. Kami mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan baik untuk melaksanakan magang.<br><br>Mohon maaf atas segala kekurangan kami selama berada di sini, Pak. Jaya dan sukses selalu!' 
+        },
+        'pak-deddy': { 
+            nama: 'Bapak Deddy', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Teruntuk Bapak Deddy. Mewakili kami berdua, kami mengucapkan terima kasih atas sambutan dan penerimaan yang hangat selama kami berada di sini.<br><br>Sehat selalu untuk Bapak, semoga rezekinya senantiasa dilancarkan.' 
+        },
+        'pak-yoga': { 
+            nama: 'Bapak Yoga', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kepada Bapak Yoga yang kami hormati. Terima kasih atas kesempatan dan penerimaan Bapak selama kami menjalankan program magang.<br><br>Semoga PT IPPI Karawang semakin maju dan Bapak selalu diberikan kesehatan serta kelancaran.' 
+        },
+        'default': { 
+            nama: 'Keluarga Besar PT IPPI Karawang', 
+            jabatan: 'PT IPPI Karawang', 
+            teks: 'Kepada seluruh Keluarga Besar PT IPPI Karawang, kami, Rifqi dan Ibni, mengucapkan terima kasih yang sebesar-besarnya karena telah menerima kami dengan tangan terbuka selama program magang ini.<br><br>Mohon maaf atas segala kekurangan kami. Semoga PT IPPI Karawang semakin meroket sukses dan jaya selalu.' 
+        }
+    };
 
         const pesanPenutupUniversal = "^500 Banyak tawa, canda, diskusi, dan pelajaran berharga yang kami lewati di tempat ini. Terima kasih telah menjadikan perjalanan magang kami begitu berwarna dan berkesan. ^500 Kami pamit undur diri, namun kenangan kebersamaan di PT IPPI akan selalu mendapat tempat khusus di hati kami berdua. ^1000";
 
